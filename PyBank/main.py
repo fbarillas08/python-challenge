@@ -26,51 +26,62 @@ import pandas as pd
 import csv
 
 profit_data = pd.read_csv(
-    '/Users/Corsair_Barillas/Documents/FAB/Quant/UM Bootcamp/UM_Homework/HW3_Python/python-challenge/PyBank/Resources/budget_data.csv')
+    '/Users/Corsair_Barillas/Documents/FAB/Quant/UMBootcamp/UM_Homework/HW3_Python/python-challenge/PyBank/Resources/budget_data.csv')
 
 # Find the total number of Months in the Entire Period
 
+print("----------------------------------------------")
 Total_Months = profit_data['Date'].count()
-print(Total_Months)
+print("Total Months Evaluated:" , Total_Months)
+
+#ADDITIONAL CALCULATION: Calculate the Number of Months with Positive Profit
+Positive_Months = len(profit_data[profit_data['Profit/Losses']>0])
+print("Profitable Months:", Positive_Months)
+
+#ADDITIONAL CALCULATION: Calculate the Number of Months with Losses
+Negative_Months = len(profit_data[profit_data['Profit/Losses']<0])
+print("Lossing Months:",Negative_Months)
+print("----------------------------------------------")
 
 # Calculate Total Net Profit for the Entire Period
 
 Total_NetProfit = profit_data['Profit/Losses'].sum()
-print('{:,}'.format(Total_NetProfit))
+print("Total Net Profit:",'{:,.2f}'.format(Total_NetProfit))
 
 # ADDITIONAL CALCULATION: Calculate Largest Profit in a Month
 
 Max_MonthProfit = profit_data['Profit/Losses'].max()
-print('{:,}'.format(Max_MonthProfit))
+print("Largest Monthly Profit:",'{:,.2f}'.format(Max_MonthProfit))
 
 # ADDITIONAL CALCULATION: Calculate Largest Loss in a Month
 
 Min_MonthProfit = profit_data['Profit/Losses'].min()
-print('{:,}'.format(Min_MonthProfit))
+print("Minimum Monthly Profit:",'{:,.2f}'.format(Min_MonthProfit))
 
 # ADDITIONAL CALCULATION: Calculate Average Monthly Profit
 Mean_MonthProfit = profit_data['Profit/Losses'].mean()
-print('{:,}'.format(Mean_MonthProfit))
+print("Average Monthly Profit:",'{:,.2f}'.format(Mean_MonthProfit))
+print("----------------------------------------------")
 
 # Find the Change in Monthly Profit
-monthly_delta = profit_data['Profit/Losses'].diff()
-mean_profit_delta = monthly_delta.mean()
+profit_data['monthly_delta'] = profit_data['Profit/Losses'].diff()
+mean_profit_delta = profit_data['monthly_delta'].mean()
 
-print(('{:,}'.format(mean_profit_delta))
+print("Average Change in Profit:",'{:,.2f}'.format(mean_profit_delta))
 
 # Find the largest monthly profit delta
-largest_profit_delta = monthly_delta.max()
 
-print('{:,}'.format(largest_profit_delta))
+max_profit_delta = profit_data['monthly_delta'].max()
+print("Largest Positive Change in Profit:",'{:,.2f}'.format(max_profit_delta))
 
 # Find the smalles monthly profit delta
-smallest_profit_delta = monthly_delta.min()
 
-print('{:,}'.format(smallest_profit_delta))
+min_profit_delta = profit_data['monthly_delta'].min()
+print("Largest Negative Change in Profit:", '{:,.2f}'.format(min_profit_delta))
+print("----------------------------------------------")
 
-# Find the date of the largest monthly profit delta
+maxprofitdelta_date = profit_data.loc[profit_data['monthly_delta']==max_profit_delta,"Date"]
+print("Date of Largest Profit Delta:",maxprofitdelta_date)
 
-
-
-
-# Find the date of the smalles monthly profit delta
+minprofitdelta_date = profit_data.loc[profit_data['monthly_delta']==min_profit_delta,"Date"]
+print("Date of Largest Loss Delta:", minprofitdelta_date)
