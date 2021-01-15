@@ -1,0 +1,12 @@
+P&L High Level Summary Report
+---------------------------------------
+Number of Periods Analyzed:  86
+Total Net Profit:            38382578
+Largest Monthly Profit:      1170593
+Largest Monthly Loss:        -1196225
+Mean Monthly Profit:         446309.0465116279
+ ---------------------------------------------------
+Largest Positive Profit Monthly Change: 1926159   Occurred on Feb-2012
+Largest Negative Profit Monthly Change: -2196167   Occurred on Sep-2013
+            Mean Profit Monthly Change: -2315.1176470588234
+ ---------------------------------------------------
